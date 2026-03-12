@@ -102,3 +102,27 @@ langToggleBtn.addEventListener('click', () => {
         }
     });
 });
+
+// 5. Active Link on Scroll (Scroll Spy) - الإضافة الجديدة
+window.addEventListener('scroll', () => {
+    let current = '';
+    const sections = document.querySelectorAll('section');
+    const navLinksArr = document.querySelectorAll('.nav-links a');
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        // بنخصم 150 بيكسل عشان يحسب القسم بمجرد ما يقرب من فوق شوية بسبب النافبار الثابتة
+        if (window.scrollY >= (sectionTop - 150)) { 
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinksArr.forEach(link => {
+        // بنشيل كلاس active من كل اللينكات
+        link.classList.remove('active');
+        // بنضيف كلاس active للينك اللي بيطابق القسم اللي واقفين عليه دلوقتي
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+});
